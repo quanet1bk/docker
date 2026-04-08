@@ -18,8 +18,9 @@ RUN pip install pandas pyarrow
 
 # set up the working directory inside the container
 WORKDIR /code
+ENV PATH="/code/.venv/bin:$PATH"
 # copy the script to the container. 1st name is source file, 2nd is destination
-COPY pipeline.py pipeline.py
-
+COPY ingest_data.py .
+#dấu chấm đại diện cho thư mục làm việc hiện tại trong container (chính là destination)
 # Set entrypoint
-ENTRYPOINT ["uv", "run", "python", "pipeline.py"]
+ENTRYPOINT ["uv", "run", "python", "ingest_data.py"]
